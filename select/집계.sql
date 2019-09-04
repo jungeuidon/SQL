@@ -50,7 +50,7 @@ select * from titles where emp_no='204120';
   
 -- ex5 [과제] 
 -- 현재 직책별로 평균연봉과 인원수를 구하되 직책별로 인원이 100명 이상인 직책만 출력하세요.  
-select avg(salaries.salary) as '평균연봉', count(*) as '인원수'
+select titles.title as '직책', avg(salaries.salary) as '평균연봉', count(*) as '인원수'
 from salaries
 inner join titles on titles.emp_no=salaries.emp_no
 where substr(titles.to_date,1,4)='9999'
