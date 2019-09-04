@@ -26,12 +26,18 @@ order by concat(last_name, ' ', first_name);
 
 -- 문제4.
 -- 전체 사원의 사번, 이름, 연봉, 직책, 부서를 모두 이름 순서로 출력합니다.   ** 현재라고 안적혀있다.
-select employees.emp_no  as 사번, concat(last_name, ' ', first_name) as  이름, salaries.salary as 연봉, titles.title as 직책, departments.dept_name as 부서
+select employees.emp_no  as '사번', concat(last_name, ' ', first_name) as  '이름', 
+salaries.salary as '연봉',
+titles.title as '직책', 
+departments.dept_name as '부서'
 from employees
-inner join salaries on employees.emp_no=salaries.emp_no
-inner join titles on employees.emp_no=titles.emp_no
-inner join dept_emp on employees.emp_no=dept_emp.emp_no
-inner join departments on dept_emp.dept_no=departments.dept_no
+left outer join salaries on employees.emp_no=salaries.emp_no
+left outer join titles on employees.emp_no=titles.emp_no
+left outer join dept_emp on employees.emp_no=dept_emp.emp_no
+left outer join departments on dept_emp.dept_no=departments.dept_no
+where substr(salaries.to_date,1,4)='9999'
+and substr(titles.to_date,1,4)='9999'
+and substr(dept_emp.to_date,1,4)='9999'
 order by concat(last_name, ' ', first_name);
 
 -- 문제5.
