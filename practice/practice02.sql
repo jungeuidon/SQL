@@ -27,4 +27,4 @@ select max(salary) as 최고임금, min(salary) as 최저임금 from salaries  w
 
 -- 문제6.
 -- 최고 어린 사원의 나이와 최 연장자의 나이는?   +1 해주기 
-select 2020-min(substr(birth_date,1,4)) as 최연장자, 2020-max(substr(birth_date,1,4)) as 최고어린사원 from employees;
+select substr(now(),1,4)-min(substr(birth_date,1,4))+1 as 최연장자, substr(now(),1,4)-max(substr(birth_date,1,4))+1 as 최고어린사원 from employees;
