@@ -64,7 +64,7 @@ where employees.last_name like 'S%';
 select titles.title as 직책, salaries.salary as 급여
 from titles
 inner join salaries on titles.emp_no = salaries.emp_no
-where salaries.salary > 50000 and substr(salaries.to_date,1,4) = '9999'
+where salaries.salary > 50000 and substr(salaries.to_date,1,4) = '9999' and substr(titles.to_date,1,4)='9999'
 order by salaries.salary desc;
 
 -- 문제9.
