@@ -31,10 +31,10 @@ salaries.salary as '연봉',
 titles.title as '직책', 
 departments.dept_name as '부서'
 from employees
-left outer join salaries on employees.emp_no=salaries.emp_no
-left outer join titles on employees.emp_no=titles.emp_no
-left outer join dept_emp on employees.emp_no=dept_emp.emp_no
-left outer join departments on dept_emp.dept_no=departments.dept_no
+inner join salaries on employees.emp_no=salaries.emp_no
+inner join titles on employees.emp_no=titles.emp_no
+inner join dept_emp on employees.emp_no=dept_emp.emp_no
+inner join departments on dept_emp.dept_no=departments.dept_no
 where substr(salaries.to_date,1,4)='9999'
 and substr(titles.to_date,1,4)='9999'
 and substr(dept_emp.to_date,1,4)='9999'
