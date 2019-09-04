@@ -3,6 +3,7 @@
 select employees.emp_no as 사번, concat(last_name, ' ', first_name) as  이름, salary as 연봉
  from employees 
  inner join salaries on employees.emp_no=salaries.emp_no
+ where substr(salaries.to_date,1,4)='9999'
  order by salary desc;
  
 -- 문제2.
@@ -51,11 +52,14 @@ where employees.last_name like 'S%';
 
 -- 문제7.
 -- 현재, 직책이 Engineer인 사원 중에서 현재 급여가 40000 이상인 사원을 급여가 큰 순서대로 출력하세요.
- select concat(last_name , ' ', first_name) as  이름, titles.title as 직책, salaries.salary as 급여
+  select concat(last_name , ' ', first_name) as  이름, titles.title as 직책, salaries.salary as 급여
  from employees
  inner join titles on employees.emp_no = titles.emp_no
  inner join salaries on employees.emp_no = salaries.emp_no
- where titles.title='Engineer' and salaries.salary>=40000
+ where titles.title='Engineer' 
+ and salaries.salary>=40000 
+ and substr(titles.to_date,1,4)='9999' 
+ and substr(salaries.to_date,1,4)='9999'
  order by salaries.salary desc;
 
 
@@ -64,7 +68,9 @@ where employees.last_name like 'S%';
 select titles.title as 직책, salaries.salary as 급여
 from titles
 inner join salaries on titles.emp_no = salaries.emp_no
-where salaries.salary > 50000 and substr(salaries.to_date,1,4) = '9999' and substr(titles.to_date,1,4)='9999'
+where salaries.salary > 50000 
+and substr(salaries.to_date,1,4) = '9999' 
+and substr(titles.to_date,1,4)='9999'
 order by salaries.salary desc;
 
 -- 문제9.
@@ -74,6 +80,7 @@ from salaries
 inner join dept_emp on dept_emp.emp_no = salaries.emp_no
 inner join departments on dept_emp.dept_no = departments.dept_no
 where substr(salaries.to_date,1,4) = '9999'
+and substr(dept_emp.to_date,1,4) = '9999'
 group by departments.dept_name
 order by avg(salaries.salary) desc;
 
@@ -86,5 +93,6 @@ select titles.title as 직책, avg(salaries.salary) as '직책별 평균 연봉'
 from salaries
 inner join titles on salaries.emp_no=titles.emp_no
 where substr(salaries.to_date,1,4) = '9999'
+and substr(titles.to_date,1,4) = '9999'
 group by titles.title
 order by avg(salaries.salary) desc;
